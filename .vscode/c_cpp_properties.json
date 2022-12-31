@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/opt/ros/humble/include/**",
+                "/workspaces/xiaocars/src/sensors/include/**",
+                "/workspaces/xiaocars/src/control/include/**",
+                "/usr/include/**",
+                "${workspaceFolder}/src/control/include",
+                "${workspaceFolder}/src/sensors/include",
+                "${workspaceFolder}/build/xiaocar_msgs/rosidl_generator_cpp"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-arm64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14"
+        }
+    ],
+    "version": 4
+}
