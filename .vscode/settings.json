@@ -124,10 +124,14 @@
         "rosdistro",
         "rosidl",
         "RTPS",
+        "Targs",
         "uncrustify",
         "Wextra",
         "Wpedantic",
+        "Xiao",
+        "xiaocar",
         "xiaocars",
+        "xiaoduckie",
         "xmllint"
     ],
     "cSpell.allowCompoundWords": true,
@@ -140,5 +144,6 @@
         ".vscode-insiders",
         ".devcontainer/devcontainer.json"
     ],
-    "ros.distro": "humble"
+    "ros.distro": "humble",
+    "cmake.configureOnOpen": false
 }

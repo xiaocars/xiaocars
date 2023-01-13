@@ -59,14 +59,14 @@
             "label": "fix",
             "detail": "Reformat files with uncrustify.",
             "type": "shell",
-            "command": "ament_uncrustify --reformat src/",
+            "command": "ament_uncrustify --reformat ./",
             "problemMatcher": []
         },
         {
             "label": "uncrustify",
             "detail": "Lint files with uncrustify.",
             "type": "shell",
-            "command": "ament_uncrustify src/",
+            "command": "ament_uncrustify ./",
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
@@ -94,7 +94,7 @@
             "detail": "Lint files with cpplint.",
             "type": "ament",
             "task": "cpplint",
-            "path": "src/",
+            "path": "./",
             "problemMatcher": [
                 "$ament_cpplint"
             ],
@@ -109,7 +109,7 @@
             "detail": "Run static code checker cppcheck.",
             "type": "ament",
             "task": "cppcheck",
-            "path": "src/",
+            "path": "./",
             "problemMatcher": [
                 "$ament_cppcheck"
             ],
@@ -124,7 +124,7 @@
             "detail": "Run lint on cmake files.",
             "type": "ament",
             "task": "lint_cmake",
-            "path": "src/",
+            "path": "./",
             "problemMatcher": [
                 "$ament_lint_cmake"
             ],
@@ -139,7 +139,7 @@
             "detail": "Run flake8 on python files.",
             "type": "ament",
             "task": "flake8",
-            "path": "src/",
+            "path": "./",
             "problemMatcher": [
                 "$ament_flake8"
             ],
@@ -154,7 +154,7 @@
             "detail": "Run pep257 on python files.",
             "type": "ament",
             "task": "pep257",
-            "path": "src/",
+            "path": "./",
             "problemMatcher": [
                 "$ament_pep257"
             ],
@@ -169,7 +169,7 @@
             "detail": "Run xmllint on xml files.",
             "type": "ament",
             "task": "xmllint",
-            "path": "src/",
+            "path": "./",
             "problemMatcher": [ 
                 "$ament_xmllint",
             ],
@@ -212,14 +212,14 @@
             "label": "import from workspace file",
             "detail": "Use vcs to import modules specified by a workspace/rosinstall file.",
             "type": "shell",
-            "command": "vcs import < src/ros2.repos src",
+            "command": "vcs import < ./ros2.repos src",
             "problemMatcher": []
         },
         {
             "label": "update workspace file",
             "detail": "Use vcs to update repositories in src to workspace file.",
             "type": "shell",
-            "command": "vcs export src > src/ros2.repos",
+            "command": "vcs export src > ./ros2.repos",
             "problemMatcher": []
         },
         {
