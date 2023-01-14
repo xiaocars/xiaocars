@@ -2,7 +2,6 @@
 #include <sensors/wheel_encoder.h>
 #include <devices/hat.h>
 #include <xiaoduckie/wheels_driver.h>
-#include <xiaoduckie/differential_drive_controller.h>
 
 namespace xiaocars
 {
@@ -25,6 +24,6 @@ XiaoDuckie::XiaoDuckie()
 
   // auto hat = devices::HAT(0x60, 1600.0);
   // auto wheels_driver = xiaoduckie::WheelsDriver(node_handle_, hat);
-  auto controller = xiaocars::DifferentialDriveController(1.0, 1.0);
+  // auto controller = xiaocars::DifferentialDriveController(1.0, 1.0);
 }        
 } // namespace xiaocars

@@ -16,17 +16,20 @@ find_package(std_msgs REQUIRED)
 
 find_package(JetsonGPIO REQUIRED)
 
+find_package(xiaocar_msgs REQUIRED)
+
 include_directories(
   include
   ${colcon_INCLUDE_DIRS}
 )
 
 add_library(
-  ${PROJECT_NAME} SHARED
-  src/hat.cc
-  src/motor.cc
+  ${PROJECT_NAME} SHARED  
   src/gpio/i2c.cc
   src/gpio/pwm.cc
+  src/hat.cc
+  src/motor.cc
+  src/wheels_driver.cc
 )
 
 target_include_directories(
@@ -44,6 +47,7 @@ ament_target_dependencies(${PROJECT_NAME}
   std_msgs
 
   JetsonGPIO
+  xiaocar_msgs
 )
 
 ament_export_include_directories(include)
@@ -60,12 +64,6 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-# add_executable(wheel_encoder_test src/wheel_encoder/wheel_encoder_publisher.cc)
-# ament_target_dependencies(wheel_encoder_test rclcpp std_msgs JetsonGPIO)
-
-# add_executable(motor_test src/motor_controller/motor_controller.cc)
-# ament_target_dependencies(wheel_encoder_test rclcpp std_msgs JetsonGPIO)
 
 #=============
 # Install
@@ -84,10 +82,5 @@ install(
   RUNTIME DESTINATION bin
   INCLUDES DESTINATION include
 )
-
-# install(
-#   TARGETS wheel_encoder_test
-#   DESTINATION lib/${PROJECT_NAME}
-# )
 
 ament_package()

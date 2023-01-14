@@ -1,10 +1,10 @@
-#include <memory>
+#include "devices/gpio/pwm.h"
+#include "devices/gpio/i2c.h"
+
+#include <iostream>
 #include <thread>
 #include <chrono>
 #include <math.h>
-
-#include <devices/gpio/i2c.h>
-#include <devices/gpio/pwm.h>
 
 namespace devices {
 

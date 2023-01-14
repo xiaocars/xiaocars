@@ -1,12 +1,12 @@
+#include "devices/gpio/i2c.h"
+
 extern "C" {
   #include <linux/i2c-dev.h>
   #include <i2c/smbus.h>
   #include <sys/ioctl.h>
 }
-#include<stdio.h>
 
-#include <devices/gpio/i2c.h>
-
+#include <stdio.h>
 #include <string>
 #include <iostream>
 #include <unistd.h>

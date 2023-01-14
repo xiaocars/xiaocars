@@ -1,10 +1,7 @@
 #pragma once
 
 #include <string>
-#include <iostream>
 #include <unistd.h>
-#include <fcntl.h>
-#include <sstream>
 
 namespace devices {
 

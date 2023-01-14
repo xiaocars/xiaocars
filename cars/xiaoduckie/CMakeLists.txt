@@ -23,10 +23,7 @@ include_directories(
 )
 
 add_executable(xiaoduckie
-  src/main.cc
-  src/xiaoduckie.cc
-  src/wheels_driver.cc
-  src/differential_drive_controller.cc)
+  src/main.cc)
 
 ament_target_dependencies(xiaoduckie rclcpp std_msgs geometry_msgs xiaocar_msgs sensors devices control)
 

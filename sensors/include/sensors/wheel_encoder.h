@@ -1,10 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
-#include <functional>
-#include <JetsonGPIO.h>
-
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/int32.hpp>
 
@@ -54,7 +49,7 @@ public:
     const std::string & topic_name,
     int & ticks,
     DIRECTION & direction,
-    std::shared_ptr<rclcpp::Node> & nh,
+    rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr& publisher,
     int queue_limit);
 
   /*!
@@ -64,12 +59,6 @@ public:
     * @param channel Reference to the GPIO pin passed in by the library.
     */
   void operator()(const std::string& channel);
-  // Callable with one string type argument
-  // {
-  //   // std::cout << "A callback named " << topic_name;
-  //   // std::cout << " called from channel " << channel << std::endl;
-  //   ticks_ += direction_;
-  // }
 
   /*!
     * @brief equality operator used by GPIO library to remove callbacks.
@@ -93,8 +82,7 @@ private:
   const std::string& topic_name_;
   int& ticks_;
   DIRECTION& direction_;
-  std::shared_ptr<rclcpp::Node> & nh_;
-  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_;
+  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr& publisher_;
   int & queue_limit_;
 };
 
@@ -104,7 +92,7 @@ private:
  * pins in the NVIDIA Jetson Nano Board
  * @ingroup Sensors
 */
-class WheelEncoder
+class WheelEncoder : public rclcpp::Node
 {
 public:
   /*!
@@ -112,17 +100,16 @@ public:
     */
   WheelEncoder() = delete;
 
-  WheelEncoder(
-    std::shared_ptr<rclcpp::Node> & nh,
-    const WheelEncoderConfig & config);
+  WheelEncoder(const WheelEncoderConfig & config);
 private:
-  std::shared_ptr<rclcpp::Node> & nh_;
   const WheelEncoderConfig & config_;
   int ticks_;
   DIRECTION direction_;
+  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_ = nullptr;
   bool initialized_ = false;
-  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_;
   std::shared_ptr<EncoderCallable> callback_ = nullptr;
+
+  void CreatePublisher();
 };
 
 

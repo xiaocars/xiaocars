@@ -1,15 +1,11 @@
 #pragma once
 
-#include <map>
-#include <utility>
-#include <memory>
-
-#include <JetsonGPIO.h>
-#include <devices/gpio/pwm.h>
+#include <string>
 
 namespace devices {
 
-// 
+class PWM;
+
 enum class MotorDirection {
   RELEASE = 0,
   FORWARD = 1,
@@ -21,24 +17,29 @@ enum class DirectionControl {
   GPIO = 1
 };
 
-class MotorPins {
-public:
-  MotorPins(int in1_pin, int in2_pin, int pwm_pin);
-private:
+struct MotorPins {
   int in1_pin_;
   int in2_pin_;
   int pwm_pin_;
 };
 
+struct MotorConfig {
+  std::string name;
+  DirectionControl control_by_;
+  MotorPins motor_pins_;
+};
+
 class Motor {
+public:
+  Motor(
+    PWM& pwm,
+    MotorConfig& motor_config);
+
+  void Run(double velocity = 0);
+
 private:
-  std::string const& name_;
-  int const K_;
-  PWM & pwm_;
-  int const in1_pin_;
-  int const in2_pin_;
-  int const pwm_pin_;
-  DirectionControl const control_by_;
+  PWM& pwm_;
+  MotorConfig& motor_config_;
   MotorDirection direction_;
 
   void SetupByGPIO();
@@ -46,18 +47,6 @@ private:
   void SetDirectionByPWM();
   int GetPWMValueFromVelocity(double velocity);
   MotorDirection GetDirectionFromVelocity(double velocity, int pwm_value);
-public:
-
-  Motor(
-    std::string const& name,
-    PWM & pwm,
-    int in1_pin,
-    int in2_pin,
-    int pwm_pin,
-    DirectionControl const control_by,
-    int const k = 16);
-
-  void Run(double velocity = 0);
 };
 
 } // namespace devices

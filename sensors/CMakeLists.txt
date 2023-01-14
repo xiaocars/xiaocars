@@ -23,7 +23,7 @@ include_directories(
 
 add_library(
   ${PROJECT_NAME} SHARED
-  src/wheel_encoder/wheel_encoder.cc
+  src/wheel_encoder.cc
 )
 
 target_include_directories(

@@ -1,13 +1,10 @@
 #pragma once
 
 #include <memory>
-#include <thread>
-#include <chrono>
-#include <math.h>
-
-#include <devices/gpio/i2c.h>
 
 namespace devices {
+
+class I2C;
 
 class PWM {
 private :

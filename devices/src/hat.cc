@@ -2,21 +2,29 @@
 #include <devices/motor.h>
 #include <devices/gpio/pwm.h>
 
+#include <string>
+
 namespace devices {
 
-HAT::HAT(int i2c_address, double frequency)
-  : i2c_address_(i2c_address),
-  frequency_(frequency),
-  pwm_(PWM(i2c_address)),
-  left_motor_(Motor("left", pwm_, 10, 9, 8, DirectionControl::PWM)),
-  right_motor_(Motor("right", pwm_, 33, 31, 13, DirectionControl::GPIO)){}
+HAT::HAT(PWM& pwm,
+  MotorConfig& left_motor_config,
+  MotorConfig& right_motor_config)
+  : pwm_{pwm} {
+    
+  left_motor_ = CreateMotor(left_motor_config);
+  right_motor_ = CreateMotor(right_motor_config);
+}
+
+std::shared_ptr<Motor> HAT::CreateMotor(MotorConfig motor_config) {
+  return std::move(std::make_shared<Motor>(pwm_, motor_config));
+}
 
 void HAT::RunRightMotor(int velocity) {
-  right_motor_.Run(velocity);
+  right_motor_->Run(velocity);
 }
 
 void HAT::RunLeftMotor(int velocity) {
-  left_motor_.Run(velocity);
+  left_motor_->Run(velocity);
 }
 
 } // namespace devices

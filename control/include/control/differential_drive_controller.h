@@ -1,24 +1,28 @@
 #pragma once
 
-#include <memory>
 #include <rclcpp/rclcpp.hpp>
-#include <std_msgs/msg/int32.hpp>
 #include <geometry_msgs/msg/twist.hpp>
 #include <xiaocar_msgs/msg/wheels_cmd_stamped.hpp>
 
+#include <memory>
+
 namespace control {
 
-class DifferentialDriveController {
+class DifferentialDriveController : public rclcpp::Node  {
 public:
-  DifferentialDriveController(std::shared_ptr<rclcpp::Node> & nh, double wheel_base, double wheel_radius);
+  DifferentialDriveController(
+    std::string& cmd_vel_topic_name,
+    std::string& wheels_vel_topic_name,
+    double wheel_base,
+    double wheel_radius);
 private:
-  std::shared_ptr<rclcpp::Node> & nh_;
   double wheel_base_;
   double wheel_radius_;
-  rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_;
-  // rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscription_;
+  rclcpp::Publisher<xiaocar_msgs::msg::WheelsCmdStamped>::SharedPtr publisher_;
+  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscription_;
 
-  // void CommandVelocityListener(geometry_msgs::msg::Twist cmd_vel);
+  void CommandVelocityListener(geometry_msgs::msg::Twist cmd_vel);
 };
+
 } // namespace control
   
