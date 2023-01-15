@@ -10,15 +10,25 @@
 
 namespace devices {
 
-// 
 Motor::Motor(
-  PWM pwm,
-  MotorConfig motor_config)
+  const PWM& pwm,
+  const MotorConfig& motor_config)
   : pwm_{pwm}
   , motor_config_{motor_config}
   , direction_{MotorDirection::FORWARD}
 {
-  
+  if (motor_config_.control_by_ == DirectionControl::GPIO) {
+    SetupByGPIO();
+  }
+}
+
+Motor::Motor(
+  const PWM&& pwm,
+    const MotorConfig&& motor_config)
+  : pwm_{std::move(pwm)}
+  , motor_config_{std::move(motor_config)}
+  , direction_{MotorDirection::FORWARD}
+{
   if (motor_config_.control_by_ == DirectionControl::GPIO) {
     SetupByGPIO();
   }

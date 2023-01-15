@@ -7,26 +7,15 @@
 
 namespace devices {
 
-// HAT::HAT(PWM& pwm,
-//   MotorConfig& left_motor_config,
-//   MotorConfig& right_motor_config)
-//   : pwm_{pwm} {
-    
-//   left_motor_ = CreateMotor(left_motor_config);
-//   right_motor_ = CreateMotor(right_motor_config);
-// }
-
-
-HAT::HAT(PWM pwm,
-  MotorConfig left_motor_config,
-  MotorConfig right_motor_config)
-  : pwm_{pwm} {
-  left_motor_ = CreateMotor(left_motor_config); 
-  right_motor_ = CreateMotor(right_motor_config);
+HAT::HAT(const PWM& pwm,
+  const MotorConfig& left_motor_config,
+  const MotorConfig& right_motor_config) {
+  left_motor_ = CreateMotor(std::move(pwm), std::move(left_motor_config)); 
+  right_motor_ = CreateMotor(std::move(pwm), std::move(right_motor_config));
 }
 
-std::shared_ptr<Motor> HAT::CreateMotor(MotorConfig motor_config) {
-  return std::move(std::make_shared<Motor>(pwm_, motor_config));
+std::shared_ptr<Motor> HAT::CreateMotor(const PWM& pwm, const MotorConfig& motor_config) {
+  return std::move(std::make_shared<Motor>(std::move(pwm), std::move(motor_config)));
 }
 
 void HAT::RunRightMotor(double velocity) {

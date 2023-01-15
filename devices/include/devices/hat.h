@@ -19,9 +19,9 @@ public:
   //   MotorConfig& right_motor_config);
   
   HAT(
-    PWM pwm,
-    MotorConfig left_motor_config,
-    MotorConfig right_motor_config);
+    const PWM& pwm,
+    const MotorConfig& left_motor_config,
+    const MotorConfig& right_motor_config);
 
   void RunRightMotor(double velocity);
   void RunLeftMotor(double velocity);
@@ -31,11 +31,10 @@ private:
   int right_motor_in2_pin_ = 9;
   int right_motor_pwm_pin_ = 8;
   
-  PWM pwm_;
   std::shared_ptr<Motor> left_motor_ = nullptr;
   std::shared_ptr<Motor> right_motor_= nullptr;
 
-  std::shared_ptr<Motor> CreateMotor(MotorConfig motor_config);
+  std::shared_ptr<Motor> CreateMotor(const PWM& pwm, const MotorConfig& motor_config);
 };
 
 } // namespace devices

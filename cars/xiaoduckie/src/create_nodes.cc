@@ -44,9 +44,9 @@ devices::HAT Build_HAT() {
   devices::MotorConfig right_motor_config = CreateRightMotorConfig();
   
   devices::HAT hat = devices::HAT(
-    pwm,
-    left_motor_config,
-    right_motor_config);
+    std::move(pwm),
+    std::move(left_motor_config),
+    std::move(right_motor_config));
 
   return hat;
 }

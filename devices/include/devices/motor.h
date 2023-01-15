@@ -34,8 +34,12 @@ struct MotorConfig {
 class Motor {
 public:
   Motor(
-    PWM pwm,
-    MotorConfig motor_config);
+    const PWM& pwm,
+    const MotorConfig& motor_config);
+
+  Motor(
+    const PWM&& pwm,
+    const MotorConfig&& motor_config);
 
   void Run(double velocity = 0);
 
