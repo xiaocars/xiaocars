@@ -9,15 +9,16 @@ namespace control {
 using std::placeholders::_1;
 
 DifferentialDriveController::DifferentialDriveController(
+  rclcpp::NodeOptions& options,
   std::string& cmd_vel_topic_name,
   std::string& wheels_vel_topic_name,
   double wheel_base,
   double wheel_radius)
-  : Node("DifferentialDriveController"),
+  : Node("DifferentialDriveController", options),
   wheel_base_{wheel_base},
   wheel_radius_{wheel_radius} {
 
-    RCLCPP_INFO(
+    RCLCPP_DEBUG(
       this->get_logger(),
       ": DifferentialDriveController: Creating publisher for topic '%s' ",
       wheels_vel_topic_name.c_str());
@@ -26,7 +27,7 @@ DifferentialDriveController::DifferentialDriveController(
       wheels_vel_topic_name,
       10);
 
-    RCLCPP_INFO(
+    RCLCPP_DEBUG(
       this->get_logger(),
       ": DifferentialDriveController: Creating Subscription for topic '%s' ",
       cmd_vel_topic_name.c_str());

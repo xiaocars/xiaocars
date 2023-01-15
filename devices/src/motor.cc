@@ -12,8 +12,8 @@ namespace devices {
 
 // 
 Motor::Motor(
-  PWM& pwm,
-  MotorConfig& motor_config)
+  PWM pwm,
+  MotorConfig motor_config)
   : pwm_{pwm}
   , motor_config_{motor_config}
   , direction_{MotorDirection::FORWARD}
@@ -59,10 +59,16 @@ int Motor::GetPWMValueFromVelocity(double velocity) {
 
 void Motor::Run(double velocity) {
 
+  std::cout << ">>>>>>>>>>>>> running " << velocity << std::endl;
+
   int pwm_value = GetPWMValueFromVelocity(velocity);
   direction_ = GetDirectionFromVelocity(velocity, pwm_value);
 
-  pwm_value = std::max(0.0, std::min(velocity, 255.0));
+  std::cout << "....................... pmw_value = " << pwm_value << std::endl;
+
+  pwm_value = std::max(0, std::min(pwm_value, 255));
+
+  std::cout << "FINAL pmw_value = " << pwm_value << std::endl;
 
   switch (motor_config_.control_by_) {
     case DirectionControl::GPIO:
@@ -72,6 +78,8 @@ void Motor::Run(double velocity) {
       SetDirectionByPWM();
       break;
   }
+  std::cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>> IN RUN MOTOR" << std::endl;
+  std::cout << "Creating Motor " << motor_config_.name << " with pwm pin" << motor_config_.motor_pins_.pwm_pin_ << std::endl;
   pwm_.setPWM(motor_config_.motor_pins_.pwm_pin_, 0, pwm_value * constants::MOTOR_K_GAIN);
 }
 

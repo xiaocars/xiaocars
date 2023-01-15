@@ -1,5 +1,7 @@
 #pragma once
 
+#include "devices/gpio/pwm.h"
+
 #include <string>
 
 namespace devices {
@@ -32,14 +34,14 @@ struct MotorConfig {
 class Motor {
 public:
   Motor(
-    PWM& pwm,
-    MotorConfig& motor_config);
+    PWM pwm,
+    MotorConfig motor_config);
 
   void Run(double velocity = 0);
 
 private:
-  PWM& pwm_;
-  MotorConfig& motor_config_;
+  PWM pwm_;
+  MotorConfig motor_config_;
   MotorDirection direction_;
 
   void SetupByGPIO();

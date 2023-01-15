@@ -10,7 +10,10 @@ class HAT;
 
 class DifferentialDriveWheelsDriver : public rclcpp::Node {
 public:
-  DifferentialDriveWheelsDriver(devices::HAT& hat, std::string& topic_name);
+  DifferentialDriveWheelsDriver(
+    rclcpp::NodeOptions& options,
+    devices::HAT& hat,
+    std::string& topic_name);
 private:
   devices::HAT& hat_;
   std::string& topic_name_;

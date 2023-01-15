@@ -42,6 +42,9 @@ public:
   void setPWMFreq(double freq);
 
   void setAllPWM(int on, int off);
+
+  int dummy_value = 55;
+
 };
 
 

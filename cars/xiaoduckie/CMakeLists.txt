@@ -23,7 +23,8 @@ include_directories(
 )
 
 add_executable(xiaoduckie
-  src/main.cc)
+  src/main.cc
+  src/create_nodes.cc)
 
 ament_target_dependencies(xiaoduckie rclcpp std_msgs geometry_msgs xiaocar_msgs sensors devices control)
 

@@ -11,6 +11,7 @@ namespace control {
 class DifferentialDriveController : public rclcpp::Node  {
 public:
   DifferentialDriveController(
+    rclcpp::NodeOptions& options,
     std::string& cmd_vel_topic_name,
     std::string& wheels_vel_topic_name,
     double wheel_base,
