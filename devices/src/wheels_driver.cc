@@ -46,10 +46,6 @@ void DifferentialDriveWheelsDriver::WheelCommandListener(
     wheel_cmd.vel_left,
     wheel_cmd.vel_right);
 
-  std::cout << "Received velocity left " 
-    << wheel_cmd.vel_left << " and velocity right " 
-    << wheel_cmd.vel_right << std::endl;
-
   hat_.RunLeftMotor(wheel_cmd.vel_left);
   hat_.RunRightMotor(wheel_cmd.vel_right);
 }

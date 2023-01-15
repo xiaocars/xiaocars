@@ -27,7 +27,6 @@ PWM::PWM(int i2c_address) {
 }
 
 void PWM::setPWM(int channel, int on, int off) {
-  std::cout << ">>>>>>>>>>>>>>>>>> setting PWM channel " << channel  << " on = " << on << " off = "<< off << std::endl;
   i2c_.get()->write8(__LED0_ON_L + 4 * channel, on & 0xFF);
   i2c_.get()->write8(__LED0_ON_H + 4 * channel, on >> 8);
   i2c_.get()->write8(__LED0_OFF_L + 4 * channel, off & 0xFF);
