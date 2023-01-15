@@ -47,9 +47,9 @@ MotorDirection Motor::GetDirectionFromVelocity(double velocity, int pwm_value) {
 int Motor::GetPWMValueFromVelocity(double velocity) {
   int pwm = 0;
   if (std::fabs(velocity) > constants::speed_tolerance) {
-    pwm = static_cast<int>(std::floor(fabs(velocity))
+    pwm = static_cast<int>(std::floor(fabs(velocity)
         * (constants::max_pwm_value - constants::min_pwm_value)
-        + constants::min_pwm_value);
+        + constants::min_pwm_value));
   }
   else if (fabs(velocity) < constants::speed_tolerance) {
     return pwm;
@@ -61,7 +61,12 @@ void Motor::Run(double velocity) {
   int pwm_value = GetPWMValueFromVelocity(velocity);
   direction_ = GetDirectionFromVelocity(velocity, pwm_value);
 
+  std::cout << "The velocity passed in is " << velocity << std::endl;
+  std::cout << "   pwm_value returned " << pwm_value << std::endl;
+
   pwm_value = std::max(0, std::min(pwm_value, 255));
+  std::cout << "Then max/min returned " << pwm_value << std::endl;
+  std::cout << "  The value after the k gain is " << (pwm_value * constants::MOTOR_K_GAIN) << std::endl;
 
   switch (motor_config_.control_by_) {
     case DirectionControl::GPIO:

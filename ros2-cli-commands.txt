@@ -1,6 +1,14 @@
 
-ros2 topic pub --once /xiaoduckie/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.55, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+ros2 topic pub --once /xiaoduckie/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.25, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
 
 ros2 topic pub --once /xiaoduckie/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
 
 ros2 topic pub --once /xiaoduckie/wheels_vel xiaocar_msgs/msg/WheelsCmdStamped "{vel_left: 0.7285714149475098, vel_right: 0.7285714149475098}"
+
+ros2 topic pub --once /xiaoduckie/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.25, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+
+ros2 topic pub --once /xiaoduckie/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+
+ros2 topic pub --once /xiaoduckie/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.75, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
+
+ros2 topic pub --once /xiaoduckie/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}"
